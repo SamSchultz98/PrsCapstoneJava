@@ -2,6 +2,10 @@ package com.bootcamp.Capstone.Models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="Requestlines")
 public class Requestline {
@@ -10,6 +14,7 @@ public class Requestline {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@JsonIgnore
 	@ManyToOne(optional=false)
 	@JoinColumn(name="requestid",columnDefinition="int")
 	private Request request;
@@ -20,6 +25,13 @@ public class Requestline {
 	
 	@Column(nullable = false)
 	private int quantity = 1;
+	
+	@JsonBackReference
+	@ManyToOne(optional=true)
+	@JoinColumn(name="requestid",columnDefinition="int",insertable=false,updatable=false)
+	private Request requestid;
+	
+	
 	
 	public Requestline() {}
 	

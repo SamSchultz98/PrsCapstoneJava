@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.bootcamp.Capstone.Models.Request;
+import com.bootcamp.Capstone.Models.Requestline;
 import com.bootcamp.Capstone.Repositories.RequestRepository;
+import com.bootcamp.Capstone.Repositories.RequestlineRepository;
 
 @CrossOrigin
 @RestController
@@ -17,6 +19,9 @@ public class RequestsController {
 	
 	@Autowired
 	private RequestRepository rqRepo;
+	
+	@Autowired
+	private RequestlineRepository rqlRepo;
 	
 	
 	@GetMapping
@@ -27,9 +32,11 @@ public class RequestsController {
 	@GetMapping("{id}")
 	public ResponseEntity<Request> getRequestsbyId(@PathVariable int id){
 		var target = rqRepo.findById(id);
+		
 		if(target.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+		target.get().setRequestlines(rqlRepo.findByRequestId(id));
 		return new ResponseEntity<Request>(target.get(), HttpStatus.FOUND);
 	}
 	
@@ -42,6 +49,7 @@ public class RequestsController {
 		if(target.get().getId() != request.getId()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		target.get().setRequestlines(rqlRepo.findByRequestId(id));
 		rqRepo.save(request);
 		return new ResponseEntity<Request>(request, HttpStatus.ACCEPTED);
 	}
@@ -51,7 +59,10 @@ public class RequestsController {
 		if(request.getId() != 0) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
+		
 		rqRepo.save(request);
+		var newRequestId=request.getId();
+		request.setRequestlines(rqlRepo.findByRequestId(newRequestId));
 		return new ResponseEntity<Request>(request, HttpStatus.ACCEPTED);
 	}
 	

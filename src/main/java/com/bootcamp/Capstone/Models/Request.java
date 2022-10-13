@@ -1,6 +1,13 @@
 package com.bootcamp.Capstone.Models;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
+
+import com.bootcamp.Capstone.Repositories.RequestlineRepository;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="Requests")
@@ -32,9 +39,14 @@ public class Request {
 	@JoinColumn(name="userid",columnDefinition="int")
 	private User user;
 	
+	@JsonManagedReference
+	@OneToMany
+	@Column(name="requestlineid",columnDefinition="int",updatable=false,insertable=false)
+	private List<Requestline> requestlines;
+	
 	public Request() {}
 
-	
+
 	
 	//Getters and Setters
 	public int getId() {
@@ -100,8 +112,44 @@ public class Request {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+
+
+	public List<Requestline> getRequestlines() {
+		return requestlines;
+	}
+
+
+
+	public void setRequestlines(List<Requestline> requestlines) {
+		this.requestlines = requestlines;
+	}
+
+
+
 	
 
+
+
+	
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+	
+	
+	
 	
 	
 }

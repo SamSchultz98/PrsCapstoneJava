@@ -65,7 +65,7 @@ public class UsersController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("login/{username}/{password}")
+	@GetMapping("{username}/{password}")
 	public ResponseEntity<User> login(@PathVariable String username, @PathVariable String password) {
 		var target = usRepo.findByUsername(username);
 		if(target == null) {
