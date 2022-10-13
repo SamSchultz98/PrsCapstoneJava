@@ -1,12 +1,8 @@
 package com.bootcamp.Capstone.Models;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import javax.persistence.*;
-
-import com.bootcamp.Capstone.Repositories.RequestlineRepository;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity

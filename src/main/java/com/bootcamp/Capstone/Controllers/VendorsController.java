@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.bootcamp.Capstone.Models.Po;
 import com.bootcamp.Capstone.Models.Vendor;
 import com.bootcamp.Capstone.Repositories.VendorRepository;
 
@@ -57,6 +55,7 @@ public class VendorsController {
 		
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@DeleteMapping("{id}")
 	public ResponseEntity deleteVendor(@PathVariable int id){
 		var target = venRepo.findById(id);

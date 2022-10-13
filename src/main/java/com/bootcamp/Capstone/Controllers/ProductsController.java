@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.bootcamp.Capstone.Models.Product;
 import com.bootcamp.Capstone.Repositories.ProductRepository;
 
@@ -53,6 +52,7 @@ public class ProductsController {
 		return new ResponseEntity<Product>(product,HttpStatus.CREATED);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@DeleteMapping("{id}")
 	public ResponseEntity deleteProduct(@PathVariable int id) {
 		var target=proRepo.findById(id);

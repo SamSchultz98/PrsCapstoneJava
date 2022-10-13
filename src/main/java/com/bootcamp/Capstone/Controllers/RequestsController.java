@@ -1,14 +1,11 @@
 package com.bootcamp.Capstone.Controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.bootcamp.Capstone.Models.Request;
-import com.bootcamp.Capstone.Models.Requestline;
 import com.bootcamp.Capstone.Repositories.RequestRepository;
 import com.bootcamp.Capstone.Repositories.RequestlineRepository;
 
@@ -68,6 +65,7 @@ public class RequestsController {
 		return new ResponseEntity<Request>(request, HttpStatus.ACCEPTED);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@DeleteMapping("{id}")
 	public ResponseEntity deleteRequest(@PathVariable int id) {
 		var target = rqRepo.findById(id);
@@ -117,6 +115,7 @@ public class RequestsController {
 		
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@GetMapping("getreviews")
 	public ResponseEntity getReviews(){
 		List<Request> targets = rqRepo.findAllByStatus("Review");
