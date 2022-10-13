@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="Requestlines")
@@ -14,9 +13,9 @@ public class Requestline {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne(optional=false)
-	@JoinColumn(name="requestid",columnDefinition="int")
+	@JoinColumn(name="requestid",columnDefinition="int",insertable=false,updatable=false)
 	private Request request;
 	
 	@ManyToOne(optional=false)
@@ -26,8 +25,9 @@ public class Requestline {
 	@Column(nullable = false)
 	private int quantity = 1;
 	
-	@JsonBackReference
-	@ManyToOne(optional=true)
+	
+	@JsonIgnore
+	@ManyToOne(optional=false)
 	@JoinColumn(name="requestid",columnDefinition="int",insertable=false,updatable=false)
 	private Request requestid;
 	
@@ -68,6 +68,16 @@ public class Requestline {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+
+	public Request getRequestid() {
+		return requestid;
+	}
+
+
+	public void setRequestid(Request requestid) {
+		this.requestid = requestid;
 	}
 	
 	

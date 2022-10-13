@@ -37,6 +37,7 @@ public class RequestsController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		target.get().setRequestlines(rqlRepo.findByRequestId(id));
+		rqRepo.save(target.get());
 		return new ResponseEntity<Request>(target.get(), HttpStatus.FOUND);
 	}
 	
@@ -63,6 +64,7 @@ public class RequestsController {
 		rqRepo.save(request);
 		var newRequestId=request.getId();
 		request.setRequestlines(rqlRepo.findByRequestId(newRequestId));
+		rqRepo.save(request);
 		return new ResponseEntity<Request>(request, HttpStatus.ACCEPTED);
 	}
 	
