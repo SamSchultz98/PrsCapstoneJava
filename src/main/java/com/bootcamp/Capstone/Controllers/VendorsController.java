@@ -41,7 +41,7 @@ public class VendorsController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		venRepo.save(vendor);
-		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(vendor ,HttpStatus.ACCEPTED);
 	}
 	
 	@PostMapping
